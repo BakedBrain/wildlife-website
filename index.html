@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Haven Sanctuary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .animals-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        .animal-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            flex: 0 1 320px;
+            max-width: 380px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .animal-card:hover::before {
+            left: 100%;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .animal-image {
+            width: 220px;
+            height: 220px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+            border: 4px solid transparent;
+        }
+
+        .animal-card:hover .animal-image {
+            transform: scale(1.08);
+            border-color: #3498db;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .animal-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .animal-card:hover .animal-name {
+            color: #e74c3c;
+        }
+
+        .animal-brief {
+            color: #7f8c8d;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .animal-card:hover .animal-brief {
+            color: #34495e;
+        }
+
+        .animal-info {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-top: 1rem;
+   
+}
+
+
+        .animal-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .animal-info p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .animal-info .highlight {
+    background: #f1f1f1;   
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    border-left: 4px solid #e74c3c; 
+    box-shadow: none;    
+
+        }
+
+        .tiger-card {
+            border-top: 5px solid #ff6b35;
+        }
+
+        .lion-card {
+            border-top: 5px solid #f39c12;
+        }
+
+        .elephant-card {
+            border-top: 5px solid #8e44ad;
+        }
+
+        .bison-card {
+            border-top: 5px solid #27ae60;
+        }
+
+        .monkey-card {
+            border-top: 5px solid #e67e22;
+        }
+
+        .leopard-card {
+            border-top: 5px solid #34495e;
+        }
+
+        .peacock-card {
+            border-top: 5px solid #3498db;
+        }
+
+        .deer-card {
+            border-top: 5px solid #16a085;
+        }
+
+        .footer {
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .animals-grid {
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+            
+            .animal-card {
+                flex: 1 1 300px;
+                padding: 1.5rem;
+            }
+            
+            .animal-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 2rem 0;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .animal-card {
+                flex: 1 1 280px;
+            }
+            
+            .animal-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌿 Wildlife Haven Sanctuary</h1>
+        <p>Protecting and caring for magnificent wildlife species in their natural habitat. Discover the incredible animals that call our sanctuary home.</p>
+    </div>
+
+    <div class="container">
+        <div class="animals-grid">
+            <!-- Tiger -->
+            <div class="animal-card tiger-card">
+                <img src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400&q=80" alt="Bengal Tiger" class="animal-image" onerror="this.style.background='linear-gradient(45deg, #ff6b35, #f7931e)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.innerHTML='🐅';">
+                <div class="animal-name">Bengal Tiger</div>
+                <div class="animal-brief">Majestic apex predator of the jungle</div>
+                <div class="animal-info">
+                    <h3>🐅 About Bengal Tigers</h3>
+                    <p>The Bengal Tiger is one of the most magnificent predators in the world. These powerful cats are known for their distinctive orange coat with black stripes and incredible hunting prowess.</p>
+                    <p><strong>Habitat:</strong> Tropical forests, grasslands, and mangrove swamps across India and Bangladesh.</p>
+                    <p><strong>Diet:</strong> Large mammals including deer, wild boar, and buffalo. Can consume up to 25 pounds of meat in a single feeding.</p>
+                    <div class="highlight">
+                        <strong>Conservation Status:</strong> Endangered - Only about 2,500 individuals remain in the wild.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lion -->
+            <div class="animal-card lion-card">
+                <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=400&h=400&fit=crop" alt="Asiatic Lion" class="animal-image">
+                <div class="animal-name">Asiatic Lion</div>
+                <div class="animal-brief">The king of the jungle</div>
+                <div class="animal-info">
+                    <h3>🦁 About Asiatic Lions</h3>
+                    <p>The Asiatic Lion is a subspecies of lion found only in India's Gir National Park. These majestic cats are slightly smaller than their African cousins but equally impressive.</p>
+                    <p><strong>Habitat:</strong> Dry deciduous forests, grasslands, and scrublands in Gujarat, India.</p>
+                    <p><strong>Diet:</strong> Hunt in groups targeting deer, antelope, wild boar, and buffalo with cooperative strategies.</p>
+                    <div class="highlight">
+                        <strong>Conservation Status:</strong> Critically Endangered - Only about 600 individuals remain.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Elephant -->
+            <div class="animal-card elephant-card">
+                <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=400&fit=crop" alt="Indian Elephant" class="animal-image">
+                <div class="animal-name">Indian Elephant</div>
+                <div class="animal-brief">Gentle giants with incredible intelligence</div>
+                <div class="animal-info">
+                    <h3>🐘 About Indian Elephants</h3>
+                    <p>Indian Elephants are gentle giants known for their intelligence, emotional depth, and complex social structures. They play a crucial role as keystone species in their ecosystem.</p>
+                    <p><strong>Habitat:</strong> Tropical forests, grasslands, and scrublands across India with seasonal migration patterns.</p>
+                    <p><strong>Diet:</strong> Consume up to 300 pounds of vegetation daily, spending 16-18 hours feeding on grasses, bark, and fruits.</p>
+                    <div class="highlight">
+                        <strong>Conservation Status:</strong> Endangered - About 27,000 individuals face habitat fragmentation threats.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Western Ghat Wild Bison -->
+            <div class="animal-card bison-card">
+                <img src="/HTML/media/wild_bison.jpg" alt="Western Ghat Wild Bison" class="animal-image bison-image-photo">
+                <div class="animal-name">Western Ghat Wild Bison</div>
+                <div class="animal-brief">Powerful herbivores of the mountains</div>
+                <div class="animal-info">
+                    <h3>🐃 About Gaur (Indian Bison)</h3>
+                    <p>The Gaur is the largest wild bovine species, found in the dense forests of the Western Ghats. These massive herbivores are impressive in both size and strength.</p>
+                    <p><strong>Habitat:</strong> Tropical and subtropical forests with dense vegetation and water sources in the Western Ghats.</p>
+                    <p><strong>Diet:</strong> Feed on grasses, shoots, fruits, and bark, playing an important role in seed dispersal.</p>
+                    <div class="highlight">
+                        <strong>Conservation Status:</strong> Vulnerable - Declining populations due to habitat loss and hunting.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Langur Monkey -->
+            <div class="animal-card monkey-card">
+                <img src="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=400&h=400&fit=crop" alt="Langur Monkey" class="animal-image">
+                <div class="animal-name">Langur Monkey</div>
+                <div class="animal-brief">Playful primates of the forest</div>
+                <div class="animal-info">
+                    <h3>🐒 About Langur Monkeys</h3>
+                    <p>Langurs are intelligent Old World monkeys known for their long tails and complex social behavior. They have sophisticated communication systems and live in organized troops.</p>
+                    <p><strong>Habitat:</strong> Various forest types from tropical rainforests to deciduous woodlands, spending most time in trees.</p>
+                    <p><strong>Diet:</strong> Primarily herbivorous, feeding on leaves, fruits, flowers, and bark with specialized multi-chambered stomachs.</p>
+                    <div class="highlight">
+                        <strong>Conservation Status:</strong> Varies by species - Important seed dispersers facing habitat fragmentation.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indian Leopard -->
+            <div class="animal-card leopard-card">
+                <img src="https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?w=400&h=400&fit=crop" alt="Indian Leopard" class="animal-image">
+                <div class="animal-name">Indian Leopard</div>
+                <div class="animal-brief">Elusive spotted cats of the night</div>
+                <div class="animal-info">
+                    <h3>🐆 About Indian Leopards</h3>
+                    <p>Indian Leopards are solitary, nocturnal cats known for their adaptability and stealth. They are excellent climbers and often store their prey in trees to avoid other predators.</p>
+                    <p><strong>Habitat:</strong> Highly adaptable, found in forests, grasslands, mountains, and even urban areas throughout India.</p>
+                    <p><strong>Diet:</strong> Opportunistic predators hunting deer, monkeys, birds, and smaller mammals with powerful bite and stealth.</p>
+                    <div class="highlight">
+                        <strong>Conservation Status:</strong> Near Threatened - Facing habitat loss and human-wildlife conflict.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indian Peacock -->
+            <div class="animal-card peacock-card">
+                <img src="/HTML/media/peacock.webp" alt="Indian Peacock" class="animal-image">
+                <div class="animal-name">Indian Peacock</div>
+                <div class="animal-brief">Spectacular birds with vibrant plumage</div>
+                <div class="animal-info">
+                    <h3>🦚 About Indian Peacocks</h3>
+                    <p>The Indian Peacock is the national bird of India, famous for its spectacular tail feathers and vibrant courtship displays. Males display their magnificent plumage to attract females during mating season.</p>
+                    <p><strong>Habitat:</strong> Forests, farmlands, and areas near water sources, preferring open woodlands with scattered trees.</p>
+                    <p><strong>Diet:</strong> Omnivorous, feeding on insects, small reptiles, seeds, fruits, helping control pests and disperse seeds.</p>
+                    <div class="highlight">
+                        <strong>Conservation Status:</strong> Stable globally but local pressures from habitat loss exist.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spotted Deer -->
+            <div class="animal-card deer-card">
+                <img src="/HTML/media/spotted_deer.jpeg" alt="Spotted Deer" class="animal-image">
+                
+                <div class="animal-name">Spotted Deer</div>
+                <div class="animal-brief">Graceful herbivores of the grasslands</div>
+                <div class="animal-info">
+                    <h3>🦌 About Spotted Deer (Chital)</h3>
+                    <p>Spotted Deer are beautiful herbivores with distinctive white spots on their reddish-brown coat. They are one of the most common deer species in India and important prey for large predators.</p>
+                    <p><strong>Habitat:</strong> Grasslands, open woodlands, and forest edges with good visibility and water access.</p>
+                    <p><strong>Diet:</strong> Graze on grasses and browse on leaves, shoots, and fruits, serving as crucial prey for tigers and leopards.</p>
+                    <div class="highlight">
+                        <strong>Conservation Status:</strong> Generally stable but face habitat loss and livestock competition.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🌍 Wildlife Haven Sanctuary - Protecting Nature's Treasures</p>
+        <p>Together, we can ensure these magnificent creatures thrive for future generations</p>
+    </div>
+</body>
+</html>
